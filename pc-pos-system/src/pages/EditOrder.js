@@ -7,9 +7,9 @@ import { useAuth } from "./utils/AuthContext";
 function EditOrder() {
 
     // Authentication
-    const {isAuthenticated, jwtToken} = useAuth();
+    const { isAuthenticated, jwtToken } = useAuth();
     const config = {
-        headers:{
+        headers: {
             Authorization: `Bearer ${jwtToken}`
         }
     }
@@ -91,7 +91,7 @@ function EditOrder() {
                                 </tbody>
                             </table>
                             <div className="btn btn-success" onClick={() => {
-                                axios.post(`http://localhost:8080/order/completed/${id}`,config)
+                                axios.post(`http://localhost:8080/order/completed/${id}`, config)
                                     .then(function (response) {
                                         navigate('/order');
                                         console.log(response);
