@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import Header from "../component/Header";
+import { useAuth } from "./utils/AuthContext";
 function Users() {
+
+    const { isAuthenticated, jwtToken } = useAuth();
+    const config = {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`
+        }
+    }
 
     // get
     const [users, setUsers] = useState(null);
     useEffect(() => {
-        axios.get("http://localhost:8080/users")
+        axios.get("http://localhost:8080/users", config)
             .then(function (response) {
                 setUsers(response.data);
                 console.log(response.data);
@@ -14,9 +22,9 @@ function Users() {
             .catch(function (error) {
                 console.log(error);
             })
-    }, []);
+    }, [isAuthenticated]);
     function getUsers(event) {
-        axios.get("http://localhost:8080/users")
+        axios.get("http://localhost:8080/users", config)
             .then(function (response) {
                 setUsers(response.data);
                 console.log(response);
@@ -59,7 +67,7 @@ function Users() {
             address: address,
             role: role
         }
-        axios.post("http://localhost:8080/user", data)
+        axios.post("http://localhost:8080/user", data, config)
             .then(function (response) {
                 getUsers();
                 setUserName("");
@@ -87,7 +95,7 @@ function Users() {
             address: address,
             role: role
         }
-        axios.put("http://localhost:8080/user/" + userId, data)
+        axios.put("http://localhost:8080/user/" + userId, data, config)
             .then(function (response) {
                 getUsers();
                 setUsers();
@@ -103,6 +111,7 @@ function Users() {
             })
     }
     // end-edit
+    
     return (
         <div className="users">
             <Header />
@@ -216,7 +225,7 @@ function Users() {
                                                 setRole(row.role);
                                             }}>Edit</button>
                                             <button type="button" className="btn btn-danger" onClick={() => {
-                                                axios.delete(`http://localhost:8080/user/${row.id}`)
+                                                axios.delete(`http://localhost:8080/user/${row.id}`, config)
                                                     .then(function (response) {
                                                         getUsers();
                                                         console.log(response);

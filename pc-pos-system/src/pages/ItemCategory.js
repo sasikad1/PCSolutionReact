@@ -5,8 +5,8 @@ import { useAuth } from "./utils/AuthContext";
 
 export default function ItemCategory() {
 
+    // authenticate
     const { isAuthenticated, jwtToken } = useAuth();
-
     const config = {
         headers: {
             Authorization: `Bearer ${jwtToken}`
@@ -32,7 +32,7 @@ export default function ItemCategory() {
                     console.log(error);
                 })
         }
-    }, [])
+    }, [isAuthenticated])
 
     function getItemCategory() {
         axios.get("http://localhost:8080/itemcategorys", config)
