@@ -56,6 +56,7 @@ export default function ItemCategory() {
         axios.post("http://localhost:8080/itemcategory", data, config)
             .then(function (response) {
                 getItemCategory();
+                setCategoryName("");
                 console.log(response);
             })
             .catch(function (error) {
@@ -76,6 +77,8 @@ export default function ItemCategory() {
         axios.put("http://localhost:8080/itemcategory/" + itemCategoryId, data, config)
             .then(function (response) {
                 getItemCategory();
+                setCategoryName("");
+                setEdit(false);
                 console.log(response);
             })
             .catch(function (error) {
@@ -98,7 +101,7 @@ export default function ItemCategory() {
                         <form onSubmit={createItemCategory}>
                             <div>
                                 <label>Item Category Name</label>
-                                <input type="text" onChange={handleName} required />
+                                <input type="text" onChange={handleName} value={itemCategoryName} required />
                             </div>
                             <button type="submit" className="btn btn-success">Submit</button>
                         </form>

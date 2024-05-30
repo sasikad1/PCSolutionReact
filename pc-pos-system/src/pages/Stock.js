@@ -116,14 +116,14 @@ export default function Stock() {
                 <h1 className="display-5">Item Category</h1>
             </div>
             <div className="row">
-                <div className="col-4">
+                <div className="col-5">
 
                     {/* create */}
                     {
                         !edit &&
                         <form onSubmit={createStock}>
                             <div>
-                                <label>Quntitiy of product</label>
+                                <label>Quntitiy of item</label>
                                 <input type="text" value={qty} onChange={handleQty} required />
                             </div>
                             <div>
@@ -175,7 +175,7 @@ export default function Stock() {
                     {/* end-update */}
                 </div>
 
-                <div className="col-8">
+                <div className="col-7">
                     <table className="table table-striped">
                         <thead>
                             <tr>
