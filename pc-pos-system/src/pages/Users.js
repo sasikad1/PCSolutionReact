@@ -4,6 +4,7 @@ import Header from "../component/Header";
 import { useAuth } from "./utils/AuthContext";
 function Users() {
 
+    // authenticate
     const { isAuthenticated, jwtToken } = useAuth();
     const config = {
         headers: {
@@ -23,7 +24,7 @@ function Users() {
                 console.log(error);
             })
     }, [isAuthenticated]);
-    function getUsers(event) {
+    function getUsers() {
         axios.get("http://localhost:8080/users", config)
             .then(function (response) {
                 setUsers(response.data);
@@ -111,7 +112,7 @@ function Users() {
             })
     }
     // end-edit
-    
+
     return (
         <div className="users">
             <Header />
@@ -125,19 +126,19 @@ function Users() {
                         <form onSubmit={createUser}>
                             <div>
                                 <label>User Name</label>
-                                <input type="text" onChange={handleUserName} required />
+                                <input type="text" value={userName} onChange={handleUserName} required />
                             </div>
                             <div>
                                 <label>Password</label>
-                                <input type="text" onChange={handlePassword} required />
+                                <input type="text" value={password} onChange={handlePassword} required />
                             </div>
                             <div>
                                 <label>Email</label>
-                                <input type="text" onChange={handleEmail} required />
+                                <input type="text" value={email} onChange={handleEmail} required />
                             </div>
                             <div>
                                 <label>Address</label>
-                                <input type="text" onChange={handleAddress} required />
+                                <input type="text" value={address} onChange={handleAddress} required />
                             </div>
                             <div>
                                 <label>Role</label>
