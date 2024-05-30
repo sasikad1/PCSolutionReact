@@ -130,7 +130,10 @@ function Item() {
     return (
         <div className="Item">
             <Header />
-            <h1>Item Page</h1>
+            <div className="text-center">
+                <h1 className="display-5">Item Page</h1>
+            </div>
+            
             {/* <div>
                 <button type="button" className="btn btn-primary" onClick={getItems}>Get Items</button>
             </div> */}

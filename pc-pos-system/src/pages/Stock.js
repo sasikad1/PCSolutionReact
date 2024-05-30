@@ -112,7 +112,9 @@ export default function Stock() {
     return (
         <>
             <Header />
-            <h1>Stock Page</h1>
+            <div className="text-center">
+                <h1 className="display-5">Item Category</h1>
+            </div>
             <div className="row">
                 <div className="col-4">
 

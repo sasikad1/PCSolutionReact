@@ -87,7 +87,9 @@ export default function ItemCategory() {
     return (
         <div className="ItemCategory">
             <Header />
-            <h1>Item Category Page</h1>
+            <div className="text-center">
+                <h1 className="display-5">Item Category</h1>
+            </div>
 
             <div className="row">
                 <div className="col-4">

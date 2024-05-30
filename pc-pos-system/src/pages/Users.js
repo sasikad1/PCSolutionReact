@@ -116,7 +116,9 @@ function Users() {
     return (
         <div className="users">
             <Header />
-            <h1>Users Page</h1>
+            <div className="text-center">
+                <h1 className="display-5">Users</h1>
+            </div>
             <div className="row">
                 {/* create */}
                 <div className="col-4">

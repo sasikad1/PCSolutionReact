@@ -43,6 +43,13 @@ function EditOrder() {
     return (
         <div className="EditOrder">
             <Header />
+            <div className="text-center">
+                <h3 className="display-4"> Shopping Cart</h3>
+                <button className="btn btn-info" onClick={()=>{
+                                navigate("/order")
+                            }}>Back to the Order</button>
+            </div>
+           
             <h1>Add Items To Order:{id}</h1>
             {
                 order &&
@@ -99,11 +106,8 @@ function EditOrder() {
                                     .catch(function (error) {
                                         console.log(error);
                                     })
-                            }}>Mark as Completed
+                            }}>Mark as Completed(Checkout)
                             </div>
-                            <button className="btn btn-info" onClick={()=>{
-                                navigate("/order")
-                            }}>Back to the Order</button>
                         </div>
 
                         <div className="col-lg-3">

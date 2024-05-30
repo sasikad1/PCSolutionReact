@@ -32,10 +32,10 @@ export default function Login() {
     }
 
     return (
-        <div className="login">
+        <div className="login text-center">
             <Header />
-            <h1>Login Page</h1>
-            <form onSubmit={handleLogin}>
+                <h1 className="display-5">Login Page</h1>
+            <form onSubmit={handleLogin} className="m-5">
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Email address</label>
                     <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={(e)=>{
@@ -48,7 +48,7 @@ export default function Login() {
                         setPassword(e.target.value);
                     }} />
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary m-4">Submit</button>
             </form>
         </div>
     )
