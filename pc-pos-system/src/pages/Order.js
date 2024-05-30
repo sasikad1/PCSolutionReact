@@ -2,25 +2,36 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import Header from "../component/Header";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "./utils/AuthContext";
 
 function Order() {
     const navigate = useNavigate();
     const [orders, setOrders] = useState(null);
 
+    // Authentication
+    const { isAuthenticated, jwtToken } = useAuth();
+    const config = {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`
+        }
+    }
+
     //get
     useEffect(() => {
-        axios.get("http://localhost:8080/orders")
-            .then(function (response) {
-                setOrders(response.data);
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-    }, [])
+        if (isAuthenticated) {
+            axios.get("http://localhost:8080/orders", config)
+                .then(function (response) {
+                    setOrders(response.data);
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
+    }, [isAuthenticated])
 
     function getOrders() {
-        axios.get("http://localhost:8080/orders")
+        axios.get("http://localhost:8080/orders", config)
             .then(function (response) {
                 setOrders(response.data);
                 console.log(response);
@@ -33,7 +44,7 @@ function Order() {
 
     // create(not pass data)
     function createOrder() {
-        axios.post("http://localhost:8080/order")
+        axios.post("http://localhost:8080/order", config)
             .then(function (response) {
                 getOrders();
                 console.log(response);

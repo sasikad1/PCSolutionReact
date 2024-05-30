@@ -20,24 +20,26 @@ export default function Stock() {
 
     //get
     useEffect(() => {
-        axios.get("http://localhost:8080/items", config)
-            .then(function (response) {
-                setItem(response.data);
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+        if (isAuthenticated) {
+            axios.get("http://localhost:8080/items", config)
+                .then(function (response) {
+                    setItem(response.data);
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
 
-        axios.get("http://localhost:8080/stocks", config)
-            .then(function (response) {
-                setStock(response.data);
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-    }, []);
+            axios.get("http://localhost:8080/stocks", config)
+                .then(function (response) {
+                    setStock(response.data);
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
+    }, [isAuthenticated]);
     function getStocks() {
         axios.get("http://localhost:8080/stocks", config)
             .then(function (response) {
@@ -87,24 +89,24 @@ export default function Stock() {
     //end-create
 
     // update
-    function updateStock(event){
+    function updateStock(event) {
         event.preventDefault();
-        const data={
-            qty:qty,
-            location:location,
+        const data = {
+            qty: qty,
+            location: location,
             itemId: itemId1
         }
-        axios.put("http://localhost:8080/stock/"+stockId, data, config)
-        .then(function(response){
+        axios.put("http://localhost:8080/stock/" + stockId, data, config)
+            .then(function (response) {
                 setQty("");
                 setLocation("");
                 setItemId("");
                 getStocks();
-            console.log(response.data);
-        })
-        .catch(function(error){
-            console.log(error);
-        })
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
 
     return (
@@ -160,7 +162,7 @@ export default function Stock() {
                                     <option value="value">Select Category</option>
                                     {
                                         items && items.map((item) => (
-                                            <option key={item.id} value={item.id} selected={item.id===itemId1}>{item.name}</option>
+                                            <option key={item.id} value={item.id} selected={item.id === itemId1}>{item.name}</option>
                                         ))
                                     }
                                 </select>
@@ -200,7 +202,7 @@ export default function Stock() {
                                                 setItemId(row.item?.id);
                                             }}>Edit</button>
                                             <button type="button" className="btn btn-danger" onClick={() => {
-                                                axios.delete(`http://localhost:8080/stock/${row.id}`,config)
+                                                axios.delete(`http://localhost:8080/stock/${row.id}`, config)
                                                     .then(function (response) {
                                                         getStocks();
                                                         console.log(response);

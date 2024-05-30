@@ -2,15 +2,26 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import Header from "../component/Header";
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from "./utils/AuthContext";
 
 function EditOrder() {
+
+    // Authentication
+    const {isAuthenticated, jwtToken} = useAuth();
+    const config = {
+        headers:{
+            Authorization: `Bearer ${jwtToken}`
+        }
+    }
+
     const { id } = useParams();
     const navigate = useNavigate();
 
     const [order, setOrder] = useState(null);
     const [items, setItems] = useState(null);
     useEffect(() => {
-        axios.get(`http://localhost:8080/order/${id}`)
+        if(isAuthenticated){
+        axios.get(`http://localhost:8080/order/${id}`, config)
             .then(function (response) {
                 setOrder(response.data);
                 console.log(response);
@@ -18,7 +29,7 @@ function EditOrder() {
             .catch(function (error) {
                 console.log(error);
             })
-        axios.get('http://localhost:8080/items')
+        axios.get('http://localhost:8080/items', config)
             .then(function (response) {
                 setItems(response.data);
                 console.log(response);
@@ -26,7 +37,8 @@ function EditOrder() {
             .catch(function (error) {
                 console.log(error);
             })
-    }, [])
+        }
+    }, [isAuthenticated])
 
     return (
         <div className="EditOrder">
@@ -63,7 +75,7 @@ function EditOrder() {
                                                 <td>{item.price}</td>
                                                 <td>
                                                     <button type="button" className="btn btn-danger" onClick={() => {
-                                                        axios.delete(`http://localhost:8080/order/${id}/item/${item.id}`)
+                                                        axios.delete(`http://localhost:8080/order/${id}/item/${item.id}`,config)
                                                             .then(function (response) {
                                                                 setOrder(response.data);
                                                                 console.log(response);
@@ -79,7 +91,7 @@ function EditOrder() {
                                 </tbody>
                             </table>
                             <div className="btn btn-success" onClick={() => {
-                                axios.post(`http://localhost:8080/order/completed/${id}`)
+                                axios.post(`http://localhost:8080/order/completed/${id}`,config)
                                     .then(function (response) {
                                         navigate('/order');
                                         console.log(response);
@@ -106,7 +118,7 @@ function EditOrder() {
                                                     itemId: item.id,
                                                     qty: 1
                                                 }
-                                                axios.post(`http://localhost:8080/order/${id}/addItem`, data)
+                                                axios.post(`http://localhost:8080/order/${id}/addItem`, data, config)
                                                     .then(function (response) {
                                                         setOrder(response.data);
                                                         console.log(response);
