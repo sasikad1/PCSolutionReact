@@ -145,9 +145,9 @@ export default function Stock() {
                                 <label>Location</label>
                                 <input type="text" value={location} onChange={handleLocation} />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label for="singleSelectListBox">Single-Select List Box:</label>
-                                <select class="form-control" onChange={handleItemId} id="singleSelectListBox">
+                                <select className="form-control" onChange={handleItemId} id="singleSelectListBox">
                                     <option value="value">Select Category</option>
                                     {
                                         items && items.map((item) => (

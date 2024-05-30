@@ -1,32 +1,45 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import Header from "../component/Header";
+import { useAuth } from "./utils/AuthContext";
 
 function Item() {
-// git test
-    //get item
+    const { isAuthenticated, jwtToken } = useAuth();
+    // git test
+    // get item
     const [items, setItems] = useState(null);
     const [categories, setCategories] = useState(null);
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`
+        }
+    }
+
     useEffect(() => {
-        axios.get("http://localhost:8080/items")
-            .then(function (response) {
-                setItems(response.data);
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.error(error);
-            });
-        axios.get("http://localhost:8080/itemcategorys")
-            .then(function (response) {
-                setCategories(response.data);
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-    }, [])
+        if (isAuthenticated) {
+            axios.get("http://localhost:8080/items", config)
+                .then(function (response) {
+                    setItems(response.data);
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+            axios.get("http://localhost:8080/itemcategorys", config)
+                .then(function (response) {
+                    setCategories(response.data);
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
+    }, [isAuthenticated])
+
+
     function getItems() {
-        axios.get("http://localhost:8080/items")
+        axios.get("http://localhost:8080/items", config)
             .then(function (response) {
                 setItems(response.data);
                 console.log(response);
@@ -34,7 +47,7 @@ function Item() {
             .catch(function (error) {
                 console.error(error);
             })
-        axios.get("http://localhost:8080/itemcategorys")
+        axios.get("http://localhost:8080/itemcategorys", config)
             .then(function (response) {
                 setCategories(response.data);
                 console.log(response);
@@ -72,7 +85,7 @@ function Item() {
             description: itemdescription,
             itemcategoryId: itemcategoryid
         }
-        axios.post("http://localhost:8080/item", data)
+        axios.post("http://localhost:8080/item", data, config)
             .then(function (response) {
                 getItems();
                 setItemName("");
@@ -98,7 +111,7 @@ function Item() {
             description: itemdescription,
             itemcategoryId: itemcategoryid
         }
-        axios.put("http://localhost:8080/item/" + itemId, data)
+        axios.put("http://localhost:8080/item/" + itemId, data,config)
             .then(function (response) {
                 getItems();
                 setEdit(null);
@@ -143,7 +156,7 @@ function Item() {
                             <div className="form-group">
                                 <label for="singleSelectListBox">Single-Select List Box:</label>
                                 <select className="form-control" onChange={handleItemCategoryId} id="singleSelectListBox">
-                                <option value="value">Select Category</option>
+                                    <option value="value">Select Category</option>
                                     {
                                         categories && categories.map((category) => (
                                             <option key={category.id} value={category.id}>{category.name}</option>
@@ -221,7 +234,7 @@ function Item() {
                                                 setItemCategoryId(row.itemCategory?.id);
                                             }}>Edit</button>
                                             <button type="button" className="btn btn-danger" onClick={() => {
-                                                axios.delete(`http://localhost:8080/item/${row.id}`)
+                                                axios.delete(`http://localhost:8080/item/${row.id}`, config)
                                                     .then(function (response) {
                                                         getItems();
                                                         console.log(response);
