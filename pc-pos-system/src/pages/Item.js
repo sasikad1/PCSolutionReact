@@ -5,7 +5,6 @@ import { useAuth } from "./utils/AuthContext";
 
 function Item() {
     const { isAuthenticated, jwtToken } = useAuth();
-    // git test
     // get item
     const [items, setItems] = useState(null);
     const [categories, setCategories] = useState(null);

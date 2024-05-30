@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import Header from "../component/Header";
+import { useAuth } from "./utils/AuthContext";
 
 export default function ItemCategory() {
 
+    const { isAuthenticated, jwtToken } = useAuth();
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`
+        }
+    }
 
     const [itemCategoryName, setCategoryName] = useState("");
 
@@ -14,18 +22,20 @@ export default function ItemCategory() {
     // get
     const [itemcategorys, setItemCategory] = useState("");
     useEffect(() => {
-        axios.get("http://localhost:8080/itemcategorys")
-            .then(function (response) {
-                setItemCategory(response.data);
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+        if (isAuthenticated) {
+            axios.get("http://localhost:8080/itemcategorys",config)
+                .then(function (response) {
+                    setItemCategory(response.data);
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
     }, [])
 
     function getItemCategory() {
-        axios.get("http://localhost:8080/itemcategorys")
+        axios.get("http://localhost:8080/itemcategorys", config)
             .then(function (response) {
                 setItemCategory(response.data);
                 console.log(response);
@@ -33,6 +43,7 @@ export default function ItemCategory() {
             .catch(function (error) {
                 console.log(error);
             })
+
     }
     // end-get
 
@@ -42,7 +53,7 @@ export default function ItemCategory() {
         const data = {
             name: itemCategoryName
         }
-        axios.post("http://localhost:8080/itemcategory", data)
+        axios.post("http://localhost:8080/itemcategory", data, config)
             .then(function (response) {
                 getItemCategory();
                 console.log(response);
@@ -57,19 +68,19 @@ export default function ItemCategory() {
     const [edit, setEdit] = useState(null);
     const [itemCategoryId, setItemCategoryId] = useState(null);
 
-    function updateItemCategory(event){
+    function updateItemCategory(event) {
         event.preventDefault();
-        const data={
+        const data = {
             name: itemCategoryName
         }
-        axios.put("http://localhost:8080/itemcategory/"+ itemCategoryId, data)
-        .then(function(response){
-            getItemCategory();
-            console.log(response);
-        })
-        .catch(function(error){
-            console.log(error);
-        })
+        axios.put("http://localhost:8080/itemcategory/" + itemCategoryId, data, config)
+            .then(function (response) {
+                getItemCategory();
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
     // end-edit
 
@@ -126,15 +137,15 @@ export default function ItemCategory() {
                                                 setItemCategoryId(row.id);
                                                 setCategoryName(row.name);
                                             }}>Edit</button>
-                                            <button type="button" className="btn btn-danger" onClick={()=>{
-                                                axios.delete(`http://localhost:8080/itemcategory/${row.id}`)
-                                                .then(function(response){
-                                                    getItemCategory();
-                                                    console.log(response);
-                                                })
-                                                .catch(function(error){
-                                                    console.log(error);
-                                                })
+                                            <button type="button" className="btn btn-danger" onClick={() => {
+                                                axios.delete(`http://localhost:8080/itemcategory/${row.id}`, config)
+                                                    .then(function (response) {
+                                                        getItemCategory();
+                                                        console.log(response);
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.log(error);
+                                                    })
                                             }}>Delete</button>
                                         </td>
                                     </tr>
