@@ -1,8 +1,9 @@
-
-
-
+import { Link } from "react-router-dom";
+import { useAuth } from "../pages/utils/AuthContext";
 
 export default function Header(){
+    const {isAuthenticated, logout} = useAuth();
+    
     return(
         <div className="Navheder">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -16,26 +17,30 @@ export default function Header(){
                         <a className="nav-link" href="#">Home</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Item</a>
+                        <a className="nav-link" href="#"><Link to="item">Item</Link><br/></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Item Category</a>
+                        <a className="nav-link"><Link to="itemcategory">Item Category</Link><br/></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Stock</a>
+                        <a className="nav-link"><Link to="stock">Stock</Link><br/></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">User</a>
+                        <a className="nav-link"><Link to="order">Order</Link><br/></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Order</a>
+                        <a className="nav-link"><Link to="users">Users</Link><br/></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Login</a>
+                        <a className="nav-link"><Link to="login">Login</Link><br/></a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link disabled" href="#">Disabled</a>
                     </li>
+                    {
+            isAuthenticated &&
+                <button type="button" className="btn btn-danger" onClick={logout}>Logout</button>
+        }
                 </ul>
             </div>
         </nav>
