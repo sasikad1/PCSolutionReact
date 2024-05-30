@@ -4,16 +4,18 @@ import Header from "../component/Header";
 import { useAuth } from "./utils/AuthContext";
 
 function Item() {
+    // Authentication
     const { isAuthenticated, jwtToken } = useAuth();
-    // get item
-    const [items, setItems] = useState(null);
-    const [categories, setCategories] = useState(null);
-
     const config = {
         headers: {
             Authorization: `Bearer ${jwtToken}`
         }
     }
+    
+    // get item
+    const [items, setItems] = useState(null);
+    const [categories, setCategories] = useState(null);
+
 
     useEffect(() => {
         if (isAuthenticated) {

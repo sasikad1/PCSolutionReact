@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import Header from "../component/Header";
+import { useAuth } from "./utils/AuthContext";
 
 export default function Stock() {
+
+    // Authentication
+    const { isAuthenticated, jwtToken } = useAuth();
+    const config = {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`
+        }
+    }
 
     const [stocks, setStock] = useState(null);
     const [items, setItem] = useState(null);
@@ -11,7 +20,7 @@ export default function Stock() {
 
     //get
     useEffect(() => {
-        axios.get("http://localhost:8080/items")
+        axios.get("http://localhost:8080/items", config)
             .then(function (response) {
                 setItem(response.data);
                 console.log(response);
@@ -20,7 +29,7 @@ export default function Stock() {
                 console.log(error);
             })
 
-        axios.get("http://localhost:8080/stocks")
+        axios.get("http://localhost:8080/stocks", config)
             .then(function (response) {
                 setStock(response.data);
                 console.log(response);
@@ -30,7 +39,7 @@ export default function Stock() {
             })
     }, []);
     function getStocks() {
-        axios.get("http://localhost:8080/stocks")
+        axios.get("http://localhost:8080/stocks", config)
             .then(function (response) {
                 setStock(response.data);
                 console.log(response);
@@ -63,7 +72,7 @@ export default function Stock() {
             location: location,
             itemId: itemId1
         }
-        axios.post("http://localhost:8080/stock", data)
+        axios.post("http://localhost:8080/stock", data, config)
             .then(function (response) {
                 setQty("");
                 setLocation("");
@@ -85,7 +94,7 @@ export default function Stock() {
             location:location,
             itemId: itemId1
         }
-        axios.put("http://localhost:8080/stock/"+stockId, data)
+        axios.put("http://localhost:8080/stock/"+stockId, data, config)
         .then(function(response){
                 setQty("");
                 setLocation("");
@@ -191,7 +200,7 @@ export default function Stock() {
                                                 setItemId(row.item?.id);
                                             }}>Edit</button>
                                             <button type="button" className="btn btn-danger" onClick={() => {
-                                                axios.delete(`http://localhost:8080/stock/${row.id}`)
+                                                axios.delete(`http://localhost:8080/stock/${row.id}`,config)
                                                     .then(function (response) {
                                                         getStocks();
                                                         console.log(response);
