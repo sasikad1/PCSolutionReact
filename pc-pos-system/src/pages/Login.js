@@ -37,7 +37,7 @@ export default function Login() {
                 <h1 className="display-5">Login Page</h1>
             <form onSubmit={handleLogin} className="m-5">
                 <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Email address</label>
+                    <label htmlFor="exampleInputEmail1">User Name</label>
                     <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={(e)=>{
                         setUserName(e.target.value);
                     }} />

@@ -44,10 +44,11 @@ function Order() {
 
     // create(not pass data)
     function createOrder() {
-        axios.post("http://localhost:8080/order", config)
+        axios.post(`http://localhost:8080/auth/order`, config)
             .then(function (response) {
                 getOrders();
                 console.log(response);
+                navigate(`/orders/${response.data.id}/editOrder`);
             })
             .catch(function (error) {
                 console.log(error);
