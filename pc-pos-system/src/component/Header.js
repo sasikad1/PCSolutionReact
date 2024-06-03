@@ -14,25 +14,25 @@ export default function Header(){
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item active">
-                        <a className="nav-link" href="#"><Link to="home" className = "text-decoration-none">Home</Link><br/></a>
+                        <a className="nav-link" href="#"><Link to="../home" className = "text-decoration-none">Home</Link><br/></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#"><Link to="item" className = "text-decoration-none">Item</Link><br/></a>
+                        <a className="nav-link" href="#"><Link to="../item" className = "text-decoration-none">Item</Link><br/></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link"><Link to="itemcategory" className = "text-decoration-none">Item Category</Link><br/></a>
+                        <a className="nav-link"><Link to="../itemcategory" className = "text-decoration-none">Item Category</Link><br/></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link"><Link to="stock" className = "text-decoration-none">Stock</Link><br/></a>
+                        <a className="nav-link"><Link to="../stock" className = "text-decoration-none">Stock</Link><br/></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link"><Link to="order" className = "text-decoration-none">Order</Link><br/></a>
+                        <a className="nav-link"><Link to="../order" className = "text-decoration-none">Order</Link><br/></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link"><Link to="users" className = "text-decoration-none">Users</Link><br/></a>
+                        <a className="nav-link"><Link to="../users" className = "text-decoration-none">Users</Link><br/></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link"><Link to="login" className = "text-decoration-none">Login</Link><br/></a>
+                        <a className="nav-link"><Link to="../login" className = "text-decoration-none">Login</Link><br/></a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link disabled" href="#">Disabled</a>
