@@ -20,6 +20,7 @@ function EditOrder() {
     const [order, setOrder] = useState(null);
     const [items, setItems] = useState(null);
     const [stocks, setStock] = useState(null);
+    const [orderedItems,setOrderedItem] = useState(null);
 
     const [itemQty, setItemQty] = useState("");
     function handleQty(event) {
@@ -44,17 +45,26 @@ function EditOrder() {
                 .catch(function (error) {
                     console.log(error);
                 })
-        }
-        axios.get("http://localhost:8080/stocks", config)
-            .then(function (response) {
-                setStock(response.data);
+            axios.get("http://localhost:8080/stocks", config)
+                .then(function (response) {
+                    setStock(response.data);
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+            axios.get(`http://localhost:8080/order/${id}/ordereditems`, config)
+            .then(function(response){
+                setOrderedItem(response.data);
                 console.log(response);
             })
-            .catch(function (error) {
+            .catch(function(error){
                 console.log(error);
             })
-    }, [isAuthenticated])
+        }
 
+    }, [isAuthenticated])
+    
     return (
         <div className="EditOrder">
             <Header />
@@ -65,7 +75,9 @@ function EditOrder() {
                 }}>Back to the Order</button>
             </div>
 
+
             <h1>Add Items To Order:{id}</h1>
+            {/* <Filter> */}
             {
                 order &&
                 <div className='order-details'>
@@ -89,8 +101,11 @@ function EditOrder() {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     {
-                                        order.orderedItems.map((item) => (
+                                        orderedItems &&
+
+                                        orderedItems.map((item) => (
                                             <tr>
                                                 <td>{item.id}</td>
                                                 <td>{item.name}</td>
@@ -179,6 +194,7 @@ function EditOrder() {
                     </div>
                 </div>
             }
+            {/* </Filter> */}
         </div>
     )
 }
