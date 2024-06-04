@@ -65,7 +65,7 @@ function EditOrder() {
 
     }, [isAuthenticated])
 
-    function getOrderedItem() {
+    function getOrderedItems() {
         axios.get(`http://localhost:8080/order/${id}/ordereditems`, config)
             .then(function (response) {
                 setOrderedItem(response.data);
@@ -179,24 +179,34 @@ function EditOrder() {
                                         <div className="item p-3 bg-light shadow-sm mb-2 rounded">
                                             <h5>{stockItem.item.name}</h5>
                                             <div>Rs. {stockItem.item.price}</div>
+                                            <div>Quntity: {stockItem.qty}</div>
                                             <form>
-                                                <input type="text" onChange={handleQty} required />
+                                                <input type="text" placeholder="Enter Quantity" onChange={handleQty} required />
                                             </form>
-                                            <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => {
-                                                const data = {
-                                                    itemId: stockItem.item.id,
-                                                    qty: itemQty
-                                                }
-                                                axios.post(`http://localhost:8080/order/${id}/addItem`, data, config)
-                                                    .then(function (response) {
-                                                        setOrder(response.data);
-                                                        getOrderedItem();
-                                                        console.log(response);
-                                                    })
-                                                    .catch(function (error) {
-                                                        console.log(error);
-                                                    })
-                                            }}>Add</button>
+                                            {
+                                                stockItem.qty <= itemQty &&
+                                                <span className="label label-warning">Out of Stock</span>
+
+                                            }
+
+                                            {
+                                                itemQty && stockItem.qty >= itemQty &&
+                                                <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => {
+                                                    const data = {
+                                                        itemId: stockItem.item.id,
+                                                        qty: itemQty
+                                                    }
+                                                    axios.post(`http://localhost:8080/order/${id}/addItem`, data, config)
+                                                        .then(function (response) {
+                                                            getOrderedItems();
+                                                            setOrder(response.data);
+                                                            console.log(response);
+                                                        })
+                                                        .catch(function (error) {
+                                                            console.log(error);
+                                                        })
+                                                }}>Add</button>
+                                            }
                                         </div>
                                     ))
                                 }
