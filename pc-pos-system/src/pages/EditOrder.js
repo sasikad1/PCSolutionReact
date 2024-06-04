@@ -77,7 +77,6 @@ function EditOrder() {
 
 
             <h1>Add Items To Order:{id}</h1>
-            {/* <Filter> */}
             {
                 order &&
                 <div className='order-details'>
@@ -100,16 +99,14 @@ function EditOrder() {
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    
+                                <tbody> 
                                     {
                                         orderedItems &&
-
                                         orderedItems.map((item) => (
                                             <tr>
-                                                <td>{item.id}</td>
-                                                <td>{item.name}</td>
-                                                <td>{item.price}</td>
+                                                <td>{item.item.id}</td>
+                                                <td>{item.item.name}</td>
+                                                <td>{item.item.price}</td>
                                                 <td>
                                                     <button type="button" className="btn btn-danger" onClick={() => {
                                                         axios.delete(`http://localhost:8080/order/${id}/item/${item.id}`, config)
@@ -194,7 +191,6 @@ function EditOrder() {
                     </div>
                 </div>
             }
-            {/* </Filter> */}
         </div>
     )
 }
