@@ -20,7 +20,7 @@ function EditOrder() {
     const [order, setOrder] = useState(null);
     const [items, setItems] = useState(null);
     const [stocks, setStock] = useState(null);
-    const [orderedItems,setOrderedItem] = useState(null);
+    const [orderedItems, setOrderedItem] = useState(null);
 
     const [itemQty, setItemQty] = useState("");
     function handleQty(event) {
@@ -54,17 +54,28 @@ function EditOrder() {
                     console.log(error);
                 })
             axios.get(`http://localhost:8080/order/${id}/ordereditems`, config)
-            .then(function(response){
-                setOrderedItem(response.data);
-                console.log(response);
-            })
-            .catch(function(error){
-                console.log(error);
-            })
+                .then(function (response) {
+                    setOrderedItem(response.data);
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
         }
 
     }, [isAuthenticated])
-    
+
+    function getOrderedItem() {
+        axios.get(`http://localhost:8080/order/${id}/ordereditems`, config)
+            .then(function (response) {
+                setOrderedItem(response.data);
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
     return (
         <div className="EditOrder">
             <Header />
@@ -96,10 +107,11 @@ function EditOrder() {
                                         <th>#ID</th>
                                         <th>Name</th>
                                         <th>Price</th>
+                                        <th>Quntity</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody> 
+                                <tbody>
                                     {
                                         orderedItems &&
                                         orderedItems.map((item) => (
@@ -107,6 +119,7 @@ function EditOrder() {
                                                 <td>{item.item.id}</td>
                                                 <td>{item.item.name}</td>
                                                 <td>{item.item.price}</td>
+                                                <td>{item.qty}</td>
                                                 <td>
                                                     <button type="button" className="btn btn-danger" onClick={() => {
                                                         axios.delete(`http://localhost:8080/order/${id}/item/${item.id}`, config)
@@ -177,6 +190,7 @@ function EditOrder() {
                                                 axios.post(`http://localhost:8080/order/${id}/addItem`, data, config)
                                                     .then(function (response) {
                                                         setOrder(response.data);
+                                                        getOrderedItem();
                                                         console.log(response);
                                                     })
                                                     .catch(function (error) {
