@@ -18,7 +18,6 @@ function EditOrder() {
     const navigate = useNavigate();
 
     const [order, setOrder] = useState(null);
-    const [items, setItems] = useState(null);
     const [stocks, setStock] = useState(null);
     const [orderedItems, setOrderedItem] = useState(null);
 
@@ -32,14 +31,6 @@ function EditOrder() {
             axios.get(`http://localhost:8080/order/${id}`, config)
                 .then(function (response) {
                     setOrder(response.data);
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
-            axios.get('http://localhost:8080/items', config)
-                .then(function (response) {
-                    setItems(response.data);
                     console.log(response);
                 })
                 .catch(function (error) {
@@ -118,11 +109,17 @@ function EditOrder() {
                                             <tr>
                                                 <td>{item.item.id}</td>
                                                 <td>{item.item.name}</td>
-                                                <td>{item.item.price}</td>
+                                                <td>{(item.item.price)*(item.qty    )}</td>
                                                 <td>{item.qty}</td>
                                                 <td>
                                                     <button type="button" className="btn btn-danger" onClick={() => {
-                                                        axios.delete(`http://localhost:8080/order/${id}/item/${item.id}`, config)
+                                                        const data ={
+                                                            id: item.id,
+                                                            orderId: item.order.id,
+                                                            itemId: item.item.id,
+                                                            qty: item.qty
+                                                        }
+                                                        axios.delete(`http://localhost:8080/order/${id}/item/${item.item.id}/orderItem`, data, config)
                                                             .then(function (response) {
                                                                 setOrder(response.data);
                                                                 console.log(response);
@@ -152,28 +149,6 @@ function EditOrder() {
 
                         <div className="col-lg-3">
                             <div className="items">
-                                {/* {
-                                    items && items.map((item) => (
-                                        <div className="item p-3 bg-light shadow-sm mb-2 rounded">
-                                            <h5>{item.name}</h5>
-                                            <div>Rs. {item.price}</div>
-                                            <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => {
-                                                const data = {
-                                                    itemId: item.id,
-                                                    qty: 1
-                                                }
-                                                axios.post(`http://localhost:8080/order/${id}/addItem`, data, config)
-                                                    .then(function (response) {
-                                                        setOrder(response.data);
-                                                        console.log(response);
-                                                    })
-                                                    .catch(function (error) {
-                                                        console.log(error);
-                                                    })
-                                            }}>Add</button>
-                                        </div>
-                                    ))
-                                } */}
                                 {
                                     stocks && stocks.map((stockItem) => (
                                         <div className="item p-3 bg-light shadow-sm mb-2 rounded">
@@ -200,6 +175,7 @@ function EditOrder() {
                                                         .then(function (response) {
                                                             getOrderedItems();
                                                             setOrder(response.data);
+                                                            setItemQty("");
                                                             console.log(response);
                                                         })
                                                         .catch(function (error) {
