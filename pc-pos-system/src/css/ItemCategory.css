@@ -1,0 +1,36 @@
+
+.btn-form-sucess{
+    position: relative;
+    margin-top: 10px;
+    margin-left: 350px;
+}
+
+.form-control{
+    position: relative;
+}
+.row{
+    /* margin: 30px; */
+}
+.form{
+    position: fixed;
+    margin-left: 0px;
+    background-color: rgb(232, 232, 236);
+    height: 100%;
+    width: 35%;
+}
+
+.table{
+    margin-top: 25px;
+    margin-left: 20%;
+    width: 80%;
+    position: relative;
+}
+
+.btn-form-danger{
+    width: 70px;
+    margin: 2px;
+}
+
+.action-col{
+    left: 30px;
+}

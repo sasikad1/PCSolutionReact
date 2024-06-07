@@ -109,7 +109,7 @@ function EditOrder() {
                                             <tr>
                                                 <td>{item.item.id}</td>
                                                 <td>{item.item.name}</td>
-                                                <td>{(item.item.price)*(item.qty    )}</td>
+                                                <td>{(item.item.price)*(item.qty)}</td>
                                                 <td>{item.qty}</td>
                                                 <td>
                                                     <button type="button" className="btn btn-danger" onClick={() => {

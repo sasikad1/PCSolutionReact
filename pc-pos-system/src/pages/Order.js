@@ -58,12 +58,19 @@ function Order() {
     return (
         <div className="Order">
             <Header />
-            <div className="text-center">
-                <h1 className="display-5">Orders</h1>
-            </div>
-            
+
+
             <div className="row">
-                <button type="button" onClick={createOrder} className="btn btn-primary">Create Order</button>
+                <div className="row row-sub">
+                    <div className="col-6">
+                        <h1 className="display-5">Orders</h1>
+                    </div>
+                    <div className="col-6">
+                        <button type="button" onClick={createOrder} className="btn btn-primary">Create Order</button>
+                    </div>
+                </div>
+
+                
                 <div className="col-11">
                     <table className="table">
                         <thead className="thead-light">

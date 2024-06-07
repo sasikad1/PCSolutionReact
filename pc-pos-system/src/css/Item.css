@@ -1,0 +1,50 @@
+.text-center{
+    padding-top: 50px;
+}
+
+.row{
+    padding: 5px;
+    margin: 2px;
+}
+
+.form{
+    position: fixed;
+    margin-left: 0px;
+    background-color: rgb(232, 232, 236);
+    height: 100%;
+    width: 35%;
+}
+
+.table{
+    margin-top: 20px;
+    margin-left: 20%;
+    width: 80%;
+    position: relative;
+}
+
+.t-header{
+    /* position: fixed; */
+    width: 900px;
+}
+
+.t-body{
+    padding-top: 600px;
+}
+
+.btn-wa{
+    width: 70px;
+    margin: 2px;
+}
+.btn-da{
+    width: 70px;
+    margin: 2px;
+}
+
+.input-line{
+    padding-top: 5px;
+}
+
+.btn-su{
+    margin-top: 10px;
+    margin-left: 350px;
+}

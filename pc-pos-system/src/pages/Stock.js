@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import Header from "../component/Header";
 import { useAuth } from "./utils/AuthContext";
+import '../css/Stock.css'
 
 export default function Stock() {
 
@@ -112,23 +113,24 @@ export default function Stock() {
     return (
         <>
             <Header />
-            <div className="text-center">
-                <h1 className="display-5">Item Category</h1>
-            </div>
-            <div className="row">
-                <div className="col-5">
 
+            <div className="row">
+                <div className="col-5 form">
+
+                    <div className="text-center">
+                        <h1 className="display-5">Stock of Items</h1>
+                    </div>
                     {/* create */}
                     {
                         !edit &&
                         <form onSubmit={createStock}>
                             <div>
                                 <label>Quntitiy of item</label>
-                                <input type="text" value={qty} onChange={handleQty} required />
+                                <input type="text" class="form-control" value={qty} onChange={handleQty} required />
                             </div>
                             <div>
                                 <label>Location</label>
-                                <input type="text" value={location} onChange={handleLocation} />
+                                <input type="text" class="form-control" value={location} onChange={handleLocation} />
                             </div>
                             <div class="form-group">
                                 <label for="singleSelectListBox">Single-Select List Box:</label>
@@ -141,7 +143,7 @@ export default function Stock() {
                                     }
                                 </select>
                             </div>
-                            <button type="submit" className="btn btn-success">Add Stock</button>
+                            <button type="submit" className="btn btn-success btn-form-sucess">Add Stock</button>
                         </form>
                     }
                     {/* create-end */}
@@ -152,11 +154,11 @@ export default function Stock() {
                         <form onSubmit={updateStock}>
                             <div>
                                 <label>Quntitiy of product</label>
-                                <input type="text" value={qty} onChange={handleQty} required />
+                                <input type="text" class="form-control" value={qty} onChange={handleQty} required />
                             </div>
                             <div>
                                 <label>Location</label>
-                                <input type="text" value={location} onChange={handleLocation} />
+                                <input type="text" class="form-control" value={location} onChange={handleLocation} />
                             </div>
                             <div className="form-group">
                                 <label for="singleSelectListBox">Single-Select List Box:</label>
@@ -175,7 +177,7 @@ export default function Stock() {
                     {/* end-update */}
                 </div>
 
-                <div className="col-7">
+                <div className="col-7 table">
                     <table className="table table-striped">
                         <thead>
                             <tr>
@@ -196,14 +198,14 @@ export default function Stock() {
                                         <td>{row.location}</td>
                                         <td>{row.item.name}</td>
                                         <td>
-                                            <button type="button" className="btn btn-warning" onClick={() => {
+                                            <button type="button" className="btn btn-warning btn-from-edit" onClick={() => {
                                                 setEdit(true);
                                                 setStockId(row.id);
                                                 setQty(row.qty);
                                                 setLocation(row.location);
                                                 setItemId(row.item?.id);
                                             }}>Edit</button>
-                                            <button type="button" className="btn btn-danger" onClick={() => {
+                                            <button type="button" className="btn btn-danger btn-form-delete" onClick={() => {
                                                 axios.delete(`http://localhost:8080/stock/${row.id}`, config)
                                                     .then(function (response) {
                                                         getStocks();

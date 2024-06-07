@@ -1,6 +1,7 @@
 import Header from "../component/Header";
 import { Link } from "react-router-dom";
 import { useAuth } from "./utils/AuthContext";
+import '../css/Home.css'
 
 export default function Home() {
     const { isAuthenticated, logout } = useAuth();

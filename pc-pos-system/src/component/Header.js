@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../pages/utils/AuthContext";
+import './Header.css';
 
 export default function Header(){
     const {isAuthenticated, logout} = useAuth();
@@ -7,17 +8,17 @@ export default function Header(){
     return(
         <div className="Navheder">
         <nav className="navbar navbar-expand-lg navbar-light bg-light" >
-            <a className="navbar-brand" href="#">PC Solution</a>
+            <a className="navbar-brand"><Link to="../home" className = "text-decoration-none">PC Solution</Link></a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item active">
-                        <a className="nav-link" href="#"><Link to="../home" className = "text-decoration-none">Home</Link><br/></a>
+                        <a className="nav-link"><Link to="../home" className = "text-decoration-none">Home</Link><br/></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#"><Link to="../item" className = "text-decoration-none">Item</Link><br/></a>
+                        <a className="nav-link"><Link to="../item" className = "text-decoration-none">Item</Link><br/></a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link"><Link to="../itemcategory" className = "text-decoration-none">Item Category</Link><br/></a>
@@ -34,12 +35,12 @@ export default function Header(){
                     <li className="nav-item">
                         <a className="nav-link"><Link to="../login" className = "text-decoration-none">Login</Link><br/></a>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <a className="nav-link disabled" href="#">Disabled</a>
-                    </li>
+                    </li> */}
                     {
             isAuthenticated &&
-                <button type="button" className="btn btn-danger m-6" onClick={logout}>Logout</button>
+                <button type="button" className="btn-logout btn btn-danger m-6" onClick={logout}>Logout</button>
         }
                 </ul>
             </div>

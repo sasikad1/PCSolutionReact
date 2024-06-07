@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import Header from "../component/Header";
 import { useAuth } from "./utils/AuthContext";
+import '../css/Item.css';
 
 function Item() {
     // Authentication
@@ -11,7 +12,7 @@ function Item() {
             Authorization: `Bearer ${jwtToken}`
         }
     }
-    
+
     // get item
     const [items, setItems] = useState(null);
     const [categories, setCategories] = useState(null);
@@ -112,7 +113,7 @@ function Item() {
             description: itemdescription,
             itemcategoryId: itemcategoryid
         }
-        axios.put("http://localhost:8080/item/" + itemId, data,config)
+        axios.put("http://localhost:8080/item/" + itemId, data, config)
             .then(function (response) {
                 getItems();
                 setEdit(null);
@@ -130,34 +131,36 @@ function Item() {
     return (
         <div className="Item">
             <Header />
-            <div className="text-center">
-                <h1 className="display-5">Item Page</h1>
-            </div>
-            
+
+
             {/* <div>
                 <button type="button" className="btn btn-primary" onClick={getItems}>Get Items</button>
             </div> */}
 
 
             <div className="row">
-                <div className="col-4">
+                <div className="form col-4">
+                    <div className="text-center">
+                        <h1 className="display-5">Item Page</h1>
+                    </div>
+
                     {/* create */}
                     {
                         !edit &&
-                        <form onSubmit={createItem}>
-                            <div>
+                        <form  onSubmit={createItem}>
+                            <div className="input-line form-group">
                                 <label>Item Name:</label>
-                                <input type="text" value={itemname} onChange={handleName} required />
+                                <input class="form-control" type="text" value={itemname} onChange={handleName} required />
                             </div>
-                            <div>
+                            <div className="input-line">
                                 <label>Item Price</label>
-                                <input type="text" value={itemprice} onChange={handlePrice} required />
+                                <input class="form-control" type="text" value={itemprice} onChange={handlePrice} required />
                             </div>
-                            <div>
+                            <div className="input-line">
                                 <label>Item Description</label>
-                                <input type="text" value={itemdescription} onChange={handleDescription} required />
+                                <input class="form-control" type="text" value={itemdescription} onChange={handleDescription} required />
                             </div>
-                            <div className="form-group">
+                            <div className="form-group input-line">
                                 <label for="singleSelectListBox">Single-Select List Box:</label>
                                 <select className="form-control" onChange={handleItemCategoryId} id="singleSelectListBox">
                                     <option value="value">Select Category</option>
@@ -168,7 +171,7 @@ function Item() {
                                     }
                                 </select>
                             </div>
-                            <button type="submit" className="btn btn-success">Submit</button>
+                            <button type="submit" className="btn btn-success btn-su">Submit</button>
                         </form>
                     }
                     {/* end-create */}
@@ -179,15 +182,15 @@ function Item() {
                         <form onSubmit={updateItem}>
                             <div>
                                 <label>Item Name</label>
-                                <input type="text" onChange={handleName} value={itemname} required />
+                                <input type="text" class="form-control" onChange={handleName} value={itemname} required />
                             </div>
                             <div>
                                 <label>Item Price</label>
-                                <input type="text" onChange={handlePrice} value={itemprice} required />
+                                <input type="text" class="form-control" onChange={handlePrice} value={itemprice} required />
                             </div>
                             <div>
                                 <label>Item Description</label>
-                                <input type="text" onChange={handleDescription} value={itemdescription} required />
+                                <input type="text" class="form-control" onChange={handleDescription} value={itemdescription} required />
                             </div>
                             <div className="form-group">
                                 <label for="singleSelectListBox">Single-Select List Box:</label>
@@ -206,10 +209,10 @@ function Item() {
                     {/* end-update */}
                 </div>
 
-                <div className="col-8">
+                <div className="table col-8">
                     <table className="table table-striped">
                         <thead>
-                            <tr>
+                            <tr className="t-header">
                                 <th scope="col">#</th>
                                 <th scope="col">ItemName</th>
                                 <th scope="col">Unit Price</th>
@@ -219,17 +222,17 @@ function Item() {
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody className="t-body">
                             {
                                 items && items.map((row) => (
-                                    <tr>
+                                    <tr >
                                         <th scope="row">{row.id}</th>
                                         <td>{row.name}</td>
                                         <td>{row.price}</td>
                                         <td>{row.description}</td>
                                         <td>{row.itemCategory.name}</td>
                                         <td>
-                                            <button type="button" className="btn btn-warning" onClick={() => {
+                                            <button type="button" className="btn btn-warning btn-wa" onClick={() => {
                                                 setEdit(true);
                                                 setItemId(row.id);
                                                 setItemName(row.name);
@@ -237,7 +240,7 @@ function Item() {
                                                 setItemDescription(row.description);
                                                 setItemCategoryId(row.itemCategory?.id);
                                             }}>Edit</button>
-                                            <button type="button" className="btn btn-danger" onClick={() => {
+                                            <button type="button" className="btn btn-danger btn-da" onClick={() => {
                                                 axios.delete(`http://localhost:8080/item/${row.id}`, config)
                                                     .then(function (response) {
                                                         getItems();

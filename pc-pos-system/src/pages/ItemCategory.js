@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import Header from "../component/Header";
 import { useAuth } from "./utils/AuthContext";
+import '../css/ItemCategory.css';
 
 export default function ItemCategory() {
 
@@ -23,7 +24,7 @@ export default function ItemCategory() {
     const [itemcategorys, setItemCategory] = useState("");
     useEffect(() => {
         if (isAuthenticated) {
-            axios.get("http://localhost:8080/itemcategorys",config)
+            axios.get("http://localhost:8080/itemcategorys", config)
                 .then(function (response) {
                     setItemCategory(response.data);
                     console.log(response);
@@ -90,20 +91,21 @@ export default function ItemCategory() {
     return (
         <div className="ItemCategory">
             <Header />
-            <div className="text-center">
-                <h1 className="display-5">Item Category</h1>
-            </div>
+
 
             <div className="row">
-                <div className="col-4">
+                <div className="col-4 form">
+                    <div className="text-center">
+                        <h1 className="display-5">Item Category</h1>
+                    </div>
                     {/* cerate */}
                     {!edit &&
                         <form onSubmit={createItemCategory}>
                             <div>
                                 <label>Item Category Name</label>
-                                <input type="text" onChange={handleName} value={itemCategoryName} required />
+                                <input type="text" class="form-control" onChange={handleName} value={itemCategoryName} required />
                             </div>
-                            <button type="submit" className="btn btn-success">Submit</button>
+                            <button type="submit" className="btn btn-success btn-form-sucess">Submit</button>
                         </form>
                     }
                     {/* end-create */}
@@ -113,7 +115,7 @@ export default function ItemCategory() {
                         <form onSubmit={updateItemCategory}>
                             <div>
                                 <label>Item Category Name</label>
-                                <input type="text" onChange={handleName} value={itemCategoryName} required />
+                                <input type="text" class="form-control" onChange={handleName} value={itemCategoryName} required />
                             </div>
                             <button type="submit" className="btn btn-success">Update</button>
                         </form>
@@ -121,7 +123,7 @@ export default function ItemCategory() {
                     {/* end-edit */}
                 </div>
 
-                <div className="col-8">
+                <div className="col-8 table">
                     <table className="table table-striped">
                         <thead>
                             <tr>
@@ -142,7 +144,7 @@ export default function ItemCategory() {
                                                 setItemCategoryId(row.id);
                                                 setCategoryName(row.name);
                                             }}>Edit</button>
-                                            <button type="button" className="btn btn-danger" onClick={() => {
+                                            <button type="button" className="btn btn-danger btn-form-danger" onClick={() => {
                                                 axios.delete(`http://localhost:8080/itemcategory/${row.id}`, config)
                                                     .then(function (response) {
                                                         getItemCategory();
