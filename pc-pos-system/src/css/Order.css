@@ -1,5 +1,32 @@
 
-.row-sub{
+.row{
+    margin-top: 20px;
     position: relative;
-    margin-top: 50px;
+}
+.row-sub{
+    position: fixed;
+    max-height: 400px;
+    margin-top: 30px;
+    z-index: 3;
+    background-color: rgb(202, 203, 204);
+    padding: 10px 0;
+   
+}
+
+.row-sub h1, .row-sub button{
+    margin-left: 40%;
+}
+
+.row-sub button{
+    margin-top: 15px;
+}
+
+.tb{
+    position: absolute;
+    top: 100px;
+    padding-right: 60px;
+}
+
+.order-status{
+    width: 170px;
 }

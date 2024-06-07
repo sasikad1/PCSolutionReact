@@ -12,12 +12,12 @@ export default function Home() {
                 <h1 className="display-5">Home Page</h1>
             </div>
 
-            <Link to="../item" className="text-decoration-none">Item</Link><br />
-            <Link to="../itemcategory" className="text-decoration-none">Item Category</Link><br />
-            <Link to="../stock" className="text-decoration-none">Stock</Link><br />
-            <Link to="../users" className="text-decoration-none">Users</Link><br />
-            <Link to="../login" className="text-decoration-none">Login</Link><br />
-            <Link to="../order" className="text-decoration-none">Order</Link><br />
+            <div className="box"><Link to="../item" className="text-decoration-none">Item</Link><br /></div>
+            <div className="box"><Link to="../itemcategory" className="text-decoration-none">Item Category</Link><br /></div>
+            <div className="box"><Link to="../stock" className="text-decoration-none">Stock</Link><br /></div>
+            <div className="box"><Link to="../users" className="text-decoration-none">Users</Link><br /></div>
+            <div className="box"><Link to="../login" className="text-decoration-none">Login</Link><br /></div>
+            <div className="box"><Link to="../order" className="text-decoration-none">Order</Link><br /></div>
 
             {
                 isAuthenticated &&

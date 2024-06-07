@@ -1,0 +1,17 @@
+.row-user{
+    margin-top: 60px;
+}
+
+.form-user{
+    position: fixed;
+    margin-left: 0px;
+    background-color: rgb(232, 232, 236);
+    height: 100%;
+    width: 35%;
+    z-index: 2;
+}
+
+.table-u{
+    margin-left: 32%;
+    width: 15%;
+}

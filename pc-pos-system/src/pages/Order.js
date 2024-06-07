@@ -3,6 +3,7 @@ import axios from 'axios';
 import Header from "../component/Header";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "./utils/AuthContext";
+import '../css/Order.css';
 
 function Order() {
     const navigate = useNavigate();
@@ -71,7 +72,7 @@ function Order() {
                 </div>
 
                 
-                <div className="col-11">
+                <div className="col-11 tb">
                     <table className="table">
                         <thead className="thead-light">
                             <tr className="">
@@ -92,7 +93,7 @@ function Order() {
                                         <td>{row.completed ? "completed" : "incomplete"}</td>
                                         <td>
                                             {
-                                                row.completed ? <button type="button" className="btn btn-success"> Completed Process</button> : <button type="button" className="btn btn-warning" onClick={() => {
+                                                row.completed ? <button type="button" className="btn btn-success order-status"> Completed Process</button> : <button type="button" className="btn btn-warning order-status" onClick={() => {
                                                     navigate(`/orders/${row.id}/editOrder`)
                                                 }}>Add or Edit Item</button>}
                                         </td>

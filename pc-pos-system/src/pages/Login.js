@@ -3,6 +3,7 @@ import axios from 'axios';
 import Header from "../component/Header";
 import { useAuth } from "./utils/AuthContext";
 import { useNavigate } from "react-router-dom";
+import '../css/Login.css'
 
 export default function Login() {
 
@@ -34,11 +35,11 @@ export default function Login() {
     return (
         <div className="login text-center">
             <Header />
-                <h1 className="display-5">Login Page</h1>
-            <form onSubmit={handleLogin} className="m-5">
+                <h1 className="display-5 login-h1">Login Page</h1>
+            <form onSubmit={handleLogin} className="m-5 form-login">
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">User Name</label>
-                    <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={(e)=>{
+                    <input type="text" className="form-control in" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={(e)=>{
                         setUserName(e.target.value);
                     }} />
                 </div>

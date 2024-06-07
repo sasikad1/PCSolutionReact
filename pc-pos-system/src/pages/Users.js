@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import Header from "../component/Header";
 import { useAuth } from "./utils/AuthContext";
+import '../css/Users.css'
 function Users() {
 
     // authenticate
@@ -116,31 +117,29 @@ function Users() {
     return (
         <div className="users">
             <Header />
-            <div className="text-center">
-                <h1 className="display-5">Users</h1>
-            </div>
-            <div className="row">
+            
+            <div className="row row-user">
                 {/* create */}
-                <div className="col-4">
+                <div className="col-4 form-user">
                     <h1>Register Users</h1>
                     {
                         !edit &&
                         <form onSubmit={createUser}>
                             <div>
                                 <label>User Name</label>
-                                <input type="text" value={userName} onChange={handleUserName} required />
+                                <input type="text" class="form-control" value={userName} onChange={handleUserName} required />
                             </div>
                             <div>
                                 <label>Password</label>
-                                <input type="text" value={password} onChange={handlePassword} required />
+                                <input type="text" class="form-control" value={password} onChange={handlePassword} required />
                             </div>
                             <div>
                                 <label>Email</label>
-                                <input type="text" value={email} onChange={handleEmail} required />
+                                <input type="text" class="form-control" value={email} onChange={handleEmail} required />
                             </div>
                             <div>
                                 <label>Address</label>
-                                <input type="text" value={address} onChange={handleAddress} required />
+                                <input type="text" class="form-control" value={address} onChange={handleAddress} required />
                             </div>
                             <div>
                                 <label>Role</label>
@@ -152,7 +151,7 @@ function Users() {
                                     <option value="Technical Support">Technical Support</option>
                                 </select>
                             </div>
-                            <button type="submit" className="btn btn-success">Register</button>
+                            <button type="submit" className="btn btn-success btn-su">Register</button>
                         </form>
                     }
                     {
@@ -161,19 +160,19 @@ function Users() {
                             <div>
                                 <div>
                                     <label>User Name</label>
-                                    <input type="text" onChange={handleUserName} value={userName} required />
+                                    <input type="text" class="form-control" onChange={handleUserName} value={userName} required />
                                 </div>
                                 <div>
                                     <label>Password</label>
-                                    <input type="text" onChange={handlePassword} value={password} required />
+                                    <input type="text" class="form-control" onChange={handlePassword} value={password} required />
                                 </div>
                                 <div>
                                     <label>Email</label>
-                                    <input type="text" onChange={handleEmail} value={email} required />
+                                    <input type="text" class="form-control" onChange={handleEmail} value={email} required />
                                 </div>
                                 <div>
                                     <label>Address</label>
-                                    <input type="text" onChange={handleAddress} value={address} required />
+                                    <input type="text" class="form-control" onChange={handleAddress} value={address} required />
                                 </div>
                                 <div>
                                     <label>Role</label>
@@ -186,14 +185,14 @@ function Users() {
                                     </select>
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-success">Update User</button>
+                            <button type="submit" className="btn btn-success btn-su">Update</button>
                         </form>
                     }
                     {/* <button type="button" className="btn btn-primary" onClick={getUsers}>Get User</button> */}
                 </div>
                 {/* end-create */}
 
-                <div className="col-8">
+                <div className="col-8 table-u">
                     {/* Table */}
                     <table class="table table-striped">
                         <thead>
@@ -218,7 +217,7 @@ function Users() {
                                         <td>{row.address}</td>
                                         <td>{row.role}</td>
                                         <td>
-                                            <button type="button" className="btn btn-warning" onClick={() => {
+                                            <button type="button" className="btn btn-warning btn-wa" onClick={() => {
                                                 setEdit(true);
                                                 setUserId(row.id);
                                                 setUserName(row.username);
@@ -227,7 +226,7 @@ function Users() {
                                                 setAddress(row.address);
                                                 setRole(row.role);
                                             }}>Edit</button>
-                                            <button type="button" className="btn btn-danger" onClick={() => {
+                                            <button type="button" className="btn btn-danger btn-da" onClick={() => {
                                                 axios.delete(`http://localhost:8080/user/${row.id}`, config)
                                                     .then(function (response) {
                                                         getUsers();
