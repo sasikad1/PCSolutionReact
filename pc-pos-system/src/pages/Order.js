@@ -32,6 +32,7 @@ function Order() {
     }, [isAuthenticated])
 
     function getOrders() {
+        if (isAuthenticated) {
         axios.get("http://localhost:8080/orders", config)
             .then(function (response) {
                 setOrders(response.data);
@@ -40,22 +41,34 @@ function Order() {
             .catch(function (error) {
                 console.log(error);
             })
+        }
     }
     //end-get
 
     // create(not pass data)
-    function createOrder() {
-        axios.post(`http://localhost:8080/auth/order`, config)
+    function createOrder(event) {
+        event.preventDefault();
+        axios.post("http://localhost:8080/order", config)
             .then(function (response) {
                 getOrders();
                 console.log(response);
-                navigate(`/orders/${response.data.id}/editOrder`);
+                navigate(`/ocd pc-pos-systemrders/${response.data.id}/editOrder`);
             })
             .catch(function (error) {
                 console.log(error);
             })
     }
-    // end-create
+    // end-create ${row.id}
+
+    function getInvoice() {
+        axios.post(`http://localhost:8080/auth/invoice/generate/user/57/order/5`, config)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
     return (
         <div className="Order">
             <Header />
@@ -71,7 +84,7 @@ function Order() {
                     </div>
                 </div>
 
-                
+
                 <div className="col-11 tb">
                     <table className="table">
                         <thead className="thead-light">
@@ -93,9 +106,18 @@ function Order() {
                                         <td>{row.completed ? "completed" : "incomplete"}</td>
                                         <td>
                                             {
-                                                row.completed ? <button type="button" className="btn btn-success order-status"> Completed Process</button> : <button type="button" className="btn btn-warning order-status" onClick={() => {
+                                                row.completed ? <button type="button" className="btn btn-success order-status" onClick={() => {
+                                                    axios.post("http://localhost:8080/invoice/generate/user/57/order/11", config)
+                                                        .then(function (response) {
+                                                            console.log(response);
+                                                        })
+                                                        .catch(function (error) {
+                                                            console.log(error);
+                                                        })
+                                                }}> Get Invoice</button> : <button type="button" className="btn btn-warning order-status" onClick={() => {
                                                     navigate(`/orders/${row.id}/editOrder`)
-                                                }}>Add or Edit Item</button>}
+                                                }}>Add or Edit Item</button>
+                                            }
                                         </td>
                                     </tr>
                                 ))

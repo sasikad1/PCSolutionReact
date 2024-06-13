@@ -1,16 +1,15 @@
-
-.btn-form-sucess{
-    position: relative;
-    margin-top: 10px;
-    margin-left: 350px;
-}
-
+ 
 .form-control{
     position: relative;
 }
-.row{
-    /* margin: 30px; */
-}
+
+
+/* .itemCategoryButton{
+    position: relative;
+    margin-top: 10px;
+    margin-left: 350px;
+} */
+
 .form{
     position: fixed;
     margin-left: 0px;

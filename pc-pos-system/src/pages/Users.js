@@ -72,11 +72,11 @@ function Users() {
         axios.post("http://localhost:8080/user", data, config)
             .then(function (response) {
                 getUsers();
-                setUserName("");
-                setPassword("");
-                setEmail("");
-                setAddress("");
-                setRole("");
+                // setUserName("");
+                // setPassword("");
+                // setEmail("");
+                // setAddress("");
+                // setRole("");
                 console.log(response);
             })
             .catch(function (error) {
@@ -121,25 +121,25 @@ function Users() {
             <div className="row row-user">
                 {/* create */}
                 <div className="col-4 form-user">
-                    <h1>Register Users</h1>
+                    <h1 className="u-h1">Register Users</h1>
                     {
                         !edit &&
                         <form onSubmit={createUser}>
                             <div>
                                 <label>User Name</label>
-                                <input type="text" class="form-control" value={userName} onChange={handleUserName} required />
+                                <input type="text" class="form-control"  onChange={handleUserName} required />
                             </div>
                             <div>
                                 <label>Password</label>
-                                <input type="text" class="form-control" value={password} onChange={handlePassword} required />
+                                <input type="text" class="form-control"  onChange={handlePassword} required />
                             </div>
                             <div>
                                 <label>Email</label>
-                                <input type="text" class="form-control" value={email} onChange={handleEmail} required />
+                                <input type="text" class="form-control"  onChange={handleEmail} required />
                             </div>
                             <div>
                                 <label>Address</label>
-                                <input type="text" class="form-control" value={address} onChange={handleAddress} required />
+                                <input type="text" class="form-control"  onChange={handleAddress} required />
                             </div>
                             <div>
                                 <label>Role</label>

@@ -100,12 +100,12 @@ export default function ItemCategory() {
                     </div>
                     {/* cerate */}
                     {!edit &&
-                        <form onSubmit={createItemCategory}>
+                        <form onSubmit={createItemCategory} className="itemCategoryFormCreate">
                             <div>
                                 <label>Item Category Name</label>
                                 <input type="text" class="form-control" onChange={handleName} value={itemCategoryName} required />
                             </div>
-                            <button type="submit" className="btn btn-success btn-form-sucess">Submit</button>
+                                <button type="submit" className="btn btn-success">Submit</button>
                         </form>
                     }
                     {/* end-create */}

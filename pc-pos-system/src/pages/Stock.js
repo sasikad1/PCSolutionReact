@@ -71,9 +71,9 @@ export default function Stock() {
     function createStock(event) {
         event.preventDefault();
         const data = {
-            qty: qty,
-            location: location,
-            itemId: itemId1
+                qty: qty,
+                location: location,
+                itemId: itemId1
         }
         axios.post("http://localhost:8080/stock", data, config)
             .then(function (response) {
@@ -103,6 +103,7 @@ export default function Stock() {
                 setLocation("");
                 setItemId("");
                 getStocks();
+                setEdit(false);
                 console.log(response.data);
             })
             .catch(function (error) {
@@ -143,7 +144,7 @@ export default function Stock() {
                                     }
                                 </select>
                             </div>
-                            <button type="submit" className="btn btn-success btn-form-sucess">Add Stock</button>
+                            <button type="submit" className="btn btn-success">Add Stock</button>
                         </form>
                     }
                     {/* create-end */}

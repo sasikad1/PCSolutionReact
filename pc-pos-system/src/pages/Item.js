@@ -171,7 +171,7 @@ function Item() {
                                     }
                                 </select>
                             </div>
-                            <button type="submit" className="btn btn-success btn-su">Submit</button>
+                            <button type="submit" className="btn btn-success">Submit</button>
                         </form>
                     }
                     {/* end-create */}
